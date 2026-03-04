@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Basic Card Style -->
+    <Style x:Key="BasicCard" TargetType="ContentControl">
+        <Setter Property="Background" Value="{DynamicResource BackgroundSecondaryBrush}"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="12" 
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{DynamicResource GlassBorderBrush}"
+                            BorderThickness="1">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.15" ShadowDepth="4" BlurRadius="12"/>
+                        </Border.Effect>
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Account Card Style -->
+    <Style x:Key="AccountCard" TargetType="ContentControl" BasedOn="{StaticResource BasicCard}">
+        <Setter Property="Padding" Value="14"/>
+        <Setter Property="Margin" Value="6"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Settings Card Style -->
+    <Style x:Key="SettingsCard" TargetType="ContentControl" BasedOn="{StaticResource BasicCard}">
+        <Setter Property="Margin" Value="0,8,0,12"/>
+        <Setter Property="Padding" Value="20,16"/>
+    </Style>
+
+</ResourceDictionary>

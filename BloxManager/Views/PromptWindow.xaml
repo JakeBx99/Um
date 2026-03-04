@@ -1,0 +1,102 @@
+<Window x:Class="BloxManager.Views.PromptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Prompt" 
+        Width="400"
+        MinWidth="300"
+        MinHeight="180"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        TextElement.Foreground="{StaticResource TextPrimaryBrush}"
+        FontFamily="Segoe UI Variable, Segoe UI, Arial"
+        ShowInTaskbar="False"
+        Topmost="True">
+
+    <Border Padding="15">
+        <Border Background="{StaticResource BackgroundMainBrush}" 
+                CornerRadius="16" 
+                BorderBrush="{StaticResource GlassBorderBrush}" 
+                BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.5"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Custom Title Bar -->
+                <Border Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown" Height="40" Padding="20,0">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Path Data="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" 
+                                  Fill="{StaticResource PrimaryAccentBrush}" 
+                                  Width="14" Height="14" Stretch="Uniform" Margin="0,0,10,0"/>
+                            <TextBlock Text="Input Required" 
+                                       FontSize="12" FontWeight="SemiBold" 
+                                       Foreground="{StaticResource TextSecondaryBrush}" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Padding="24,20,24,20">
+                    <StackPanel VerticalAlignment="Top">
+                        <TextBlock x:Name="MessageTextBlock" 
+                                   Text="Enter text:" 
+                                   FontSize="14" FontWeight="SemiBold" 
+                                   Foreground="{StaticResource TextPrimaryBrush}" 
+                                   Margin="0,0,0,16"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Stretch"/>
+
+                        <TextBox x:Name="InputTextBox" 
+                                 Style="{StaticResource Input}" 
+                                 Height="160"
+                                 Padding="12,8"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalContentAlignment="Top"
+                                 VerticalScrollBarVisibility="Auto"
+                                 FontSize="13"
+                                 HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Footer -->
+                <Border Grid.Row="2" 
+                        Background="{StaticResource GlassBackgroundBrush}" 
+                        CornerRadius="0,0,16,16" 
+                        Padding="20,16"
+                        BorderBrush="{StaticResource GlassBorderBrush}"
+                        BorderThickness="0,1,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="CancelButton" Content="Cancel" 
+                                    IsCancel="True" 
+                                    Style="{StaticResource SecondaryActionButton}" 
+                                    Width="90" Height="36" Margin="0,0,10,0" 
+                                    Click="CancelButton_Click"/>
+                            <Button Content="OK" 
+                                    Style="{StaticResource PrimaryActionButton}" 
+                                    Width="80" Height="36"
+                                    Click="OK_Click" 
+                                    IsDefault="True"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

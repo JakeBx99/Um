@@ -121,8 +121,8 @@ namespace RBX_Alt_Manager
             if (!General.Exists("CheckForUpdates")) General.Set("CheckForUpdates", "false");
             if (!General.Exists("SavedLaunchData")) General.Set("SavedLaunchData", "{\"psCode\":\"lanrp\"}");
             if (!General.Exists("EnableMultiRbx")) General.Set("EnableMultiRbx", "true");
-            if (!General.Exists("AccountJoinDelay")) General.Set("AccountJoinDelay", "8");
-            if (!General.Exists("AsyncJoin")) General.Set("AsyncJoin", "false");
+            if (!General.Exists("AccountJoinDelay")) General.Set("AccountJoinDelay", "0");
+            if (!General.Exists("AsyncJoin")) General.Set("AsyncJoin", "true");
             if (!General.Exists("DisableAgingAlert")) General.Set("DisableAgingAlert", "false");
             if (!General.Exists("SavePasswords")) General.Set("SavePasswords", "true");
             if (!General.Exists("ServerRegionFormat")) General.Set("ServerRegionFormat", "<city>, <countryCode>", "Visit http://ip-api.com/json/1.1.1.1 to see available format options");
@@ -162,8 +162,8 @@ namespace RBX_Alt_Manager
             if (!WebServer.Exists("AllowExternalConnections")) WebServer.Set("AllowExternalConnections", "false");
 
             if (!AccountControl.Exists("AllowExternalConnections")) AccountControl.Set("AllowExternalConnections", "false");
-            if (!AccountControl.Exists("RelaunchDelay")) AccountControl.Set("RelaunchDelay", "60");
-            if (!AccountControl.Exists("LauncherDelayNumber")) AccountControl.Set("LauncherDelayNumber", "9");
+            if (!AccountControl.Exists("RelaunchDelay")) AccountControl.Set("RelaunchDelay", "0");
+            if (!AccountControl.Exists("LauncherDelayNumber")) AccountControl.Set("LauncherDelayNumber", "0");
             if (!AccountControl.Exists("NexusPort")) AccountControl.Set("NexusPort", "5242");
 
             InitializeComponent();
@@ -2037,13 +2037,16 @@ namespace RBX_Alt_Manager
 
                 await account.JoinServer(PlaceId, JobId, FollowUser, VIPServer, false, LaunchData.Text);
 
-                if (AsyncJoin)
+                if (Delay > 0)
                 {
-                    while (!LaunchNext)
-                        await Task.Delay(50);
+                    if (AsyncJoin)
+                    {
+                        while (!LaunchNext)
+                            await Task.Delay(50);
+                    }
+                    else
+                        await Task.Delay(Delay * 1000);
                 }
-                else
-                    await Task.Delay(Delay * 1000);
 
                 LaunchNext = false;
             }
